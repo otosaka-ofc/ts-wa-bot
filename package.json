@@ -1,0 +1,43 @@
+{
+  "name": "ts-wa-bot",
+  "version": "0.0.1-alpha",
+  "description": "complete template of whatsapp bot",
+  "main": "./dist/index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otosaka-ofc/ts-wa-bot.git"
+  },
+  "keywords": [
+    "bot",
+    "whatsapp",
+    "whatsappbot"
+  ],
+  "author": "otosaka-ofc",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/otosaka-ofc/ts-wa-bot/issues"
+  },
+  "homepage": "https://github.com/otosaka-ofc/ts-wa-bot#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "mocha": "^10.7.3",
+    "nodemon": "^3.1.4",
+    "prettier": "3.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "github:allburov/Baileys#patch-2",
+    "chalk": "^4.1.2",
+    "dayjs": "^1.11.13",
+    "link-preview-js": "^3.0.5",
+    "pino": "^9.3.2",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
