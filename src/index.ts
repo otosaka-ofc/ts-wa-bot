@@ -2,11 +2,14 @@ import { Boom } from "@hapi/boom";
 import makeWASocket, {
     ConnectionState,
     DisconnectReason,
+    MessageUpsertType,
     useMultiFileAuthState,
     UserFacingSocketConfig,
+    WAMessage,
     WASocket,
 } from "@whiskeysockets/baileys";
 import Pino, { Logger, LoggerOptions } from "pino";
+import { messageController } from "./controllers";
 
 async function startAll() {
     let { state, saveCreds } = await useMultiFileAuthState("./auth-session");
@@ -15,9 +18,9 @@ async function startAll() {
         printQRInTerminal: true,
         browser: ["OTO-Labs", "Chrome", "1.0.0"],
     };
-    const sock: WASocket = makeWASocket(config);
+    const socket: WASocket = await makeWASocket(config);
 
-    sock.ev.on("connection.update", (update: Partial<ConnectionState>) => {
+    socket.ev.on("connection.update", (update: Partial<ConnectionState>) => {
         let { connection, lastDisconnect } = update;
         if (connection === "close") {
             const shouldReconnect: boolean =
@@ -31,7 +34,12 @@ async function startAll() {
         }
     });
 
-    sock.ev.on("creds.update", saveCreds);
+    socket.ev.on("creds.update", saveCreds);
+    socket.ev.on(
+        "messages.upsert",
+        (arg: { messages: WAMessage[]; type: MessageUpsertType }) =>
+            messageController(arg, socket),
+    );
 }
 
 startAll();

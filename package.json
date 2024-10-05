@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec ts-node ./src/index.ts",
     "build": "tsc",
-    "start": "node ./build/index.js"
+    "start": "node ./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/otosaka-ofc/ts-wa-bot#readme",
   "devDependencies": {
     "@types/node": "^22.5.1",
+    "@types/similarity": "^1.2.3",
     "mocha": "^10.7.3",
     "nodemon": "^3.1.4",
     "prettier": "3.3.3",
@@ -33,11 +34,20 @@
   },
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "@whiskeysockets/baileys": "github:allburov/Baileys#patch-2",
+    "@whiskeysockets/baileys": "^6.7.8",
     "chalk": "^4.1.2",
     "dayjs": "^1.11.13",
     "link-preview-js": "^3.0.5",
     "pino": "^9.3.2",
-    "qrcode-terminal": "^0.12.0"
+    "qrcode-terminal": "^0.12.0",
+    "similarity": "^1.2.1",
+    "vm2": "^3.9.19"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/auth-session/**",
+      "**/dist/**",
+      "**/node_modules/**"
+    ]
   }
 }
